@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,11 @@ Route::middleware('auth')->group(function () {
 
     //category route
     Route::post('/category',[CategoryController::class,'create'])->name('category.create');
+
+    //frontend route
+
+    Route::get('/home',[HomeController::class,'index'])->name('home.page');
+    Route::get('/contact',[HomeController::class,'contact'])->name('contact');
 
 
 

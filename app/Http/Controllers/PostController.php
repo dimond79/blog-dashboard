@@ -61,7 +61,7 @@ class PostController extends Controller
         $post = Post::with('categories')->where('slug', $slug)->firstOrFail();
         // dd($post->categories->toArray());
         // $categories = $post->categories;
-        return view('post.showpost',compact('post'));
+        return view('frontend.blog.post',compact('post'));
 
     }
 

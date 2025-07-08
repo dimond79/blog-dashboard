@@ -1,3 +1,5 @@
+{{-- this file should be deleted, it is for backend --}}
+
 
 <div class="max-w-3xl mx-auto mt-10 p-6 bg-blue-100 shadow-lg rounded-xl border border-gray-200">
     <h1 class="text-3xl font-bold text-gray-800 mb-4">{{ $post->title }}</h1>
