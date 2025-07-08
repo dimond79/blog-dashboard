@@ -10,7 +10,8 @@ class Post extends Model
         'title',
         'slug',
         'body',
-        'user_id'
+        'image',
+        'user_id',
     ];
 
     public function getRouteKeyName(){

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/post',[PostController::class,'create'])->name('post.create');
     Route::get('/post/list', [PostController::class,'list'])->name('post.list');
     Route::get('/post/{slug}',[PostController::class, 'show'])->name('post.show');
+
+    //category route
+    Route::post('/category',[CategoryController::class,'create'])->name('category.create');
 
 
 

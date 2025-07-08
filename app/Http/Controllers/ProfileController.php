@@ -41,7 +41,7 @@ class ProfileController extends Controller
             $data['user_id'] = $request->user()->id;
             if($request->hasFile('avatar')){
                 $file = $request->file('avatar');
-                //optional, renaming the file
+                //optional, renaming the file for unique
                 $filename = time() . '.' . $file->getClientOriginalExtension();
                 // $path = $file->storeAs('public/avatars',$filename);
                 $path = $file->storeAs('avatars', $filename, 'public');

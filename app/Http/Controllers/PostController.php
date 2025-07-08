@@ -21,14 +21,27 @@ class PostController extends Controller
                 'title'=>'required|string',
                 'body'=>'required',
                 'categories' => 'required|array',
+                'image' => 'nullable|image|max:2048'
             ]);
             //Auto generate slug
             $data['slug'] = Str::slug($request->title);
 
             $data['user_id'] = $request->user()->id;
 
+            if($request->hasFile('image')){
+                $file = $request->file('image');
+
+                $filename = time() . '.' . $file->getClientOriginalExtension();
+
+                $path = $file->storeAs('public/posts', $filename);
+
+                $data['image'] = 'posts/' .$filename;
+
+            }
+
             $post = Post::create($data);
             // dd($post->toArray());
+
             $post->categories()->attach($data['categories']);
 
            return redirect()->route('post.list')->with('success', 'Post created successfully.');
@@ -45,10 +58,10 @@ class PostController extends Controller
     }
 
     public function show($slug){
-        $post = Post::where('slug', $slug)->firstOrFail();
+        $post = Post::with('categories')->where('slug', $slug)->firstOrFail();
         // dd($post->categories->toArray());
-        $categories = $post->categories;
-        return view('post.showpost',compact('post','categories'));
+        // $categories = $post->categories;
+        return view('post.showpost',compact('post'));
 
     }
 
