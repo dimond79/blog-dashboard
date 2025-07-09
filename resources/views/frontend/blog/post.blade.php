@@ -17,7 +17,7 @@
                             <span class="meta">
                                 Posted by
                                 <a href="#!">{{$post->user->name}} </a>
-                                on August 24, 2023
+                                on {{$post->created_at->format('F d, Y')}}
                             </span>
                             @foreach($post->categories as $category)
                                 <button class="btn btn-primary btn-sm rounded-pill">{{$category->name}}</button>

@@ -35,12 +35,14 @@
                         <p class="post-meta">
                             Posted by
                             <a href="#!">{{ $post->user->name }}</a>
-                            on September 24, 2023
+                            on {{$post->created_at->format('F d, Y')}}
                         </p>
                     </div>
                     <!-- Divider-->
                     <hr class="my-4" />
                 @endforeach
+
+                {{$posts->links()}}
                 <!-- Post preview-->
                 {{-- <div class="post-preview">
                         <a href="post.html">
@@ -94,4 +96,10 @@
             </div>
         </div>
     </div>
+
+    <style>
+        .w-5.h-5{
+            width:20px;
+        }
+    </style>
 @endsection

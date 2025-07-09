@@ -27,18 +27,22 @@ Route::middleware('auth')->group(function () {
     Route::get('/post', [PostController::class,'index'])->name('post.write');
     Route::post('/post',[PostController::class,'create'])->name('post.create');
     Route::get('/post/list', [PostController::class,'list'])->name('post.list');
-    Route::get('/post/{slug}',[PostController::class, 'show'])->name('post.show');
+
 
     //category route
     Route::post('/category',[CategoryController::class,'create'])->name('category.create');
 
-    //frontend route
 
-    Route::get('/home',[HomeController::class,'index'])->name('home.page');
-    Route::get('/contact',[HomeController::class,'contact'])->name('contact');
 
 
 
 });
+ //frontend route
+
+    Route::get('/home',[HomeController::class,'index'])->name('home.page');
+    Route::get('/contact',[HomeController::class,'contact'])->name('contact');
+
+    //post route
+    Route::get('/post/{slug}',[PostController::class, 'show'])->name('post.show');
 
 require __DIR__.'/auth.php';
