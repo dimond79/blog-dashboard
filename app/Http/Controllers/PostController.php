@@ -65,5 +65,10 @@ class PostController extends Controller
 
     }
 
+    public function edit(){
+        $post = Auth::user()->post;
+        return view('post.editpost');
+    }
+
 
 }

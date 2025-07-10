@@ -7,9 +7,9 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white dark:bg-white-800 shadow sm:rounded-lg">
+            {{-- <div class="p-4 sm:p-8 bg-white dark:bg-white-800 shadow sm:rounded-lg">
                 <div class="max-w-xl">
-                    {{-- @include('profile.partials.update-profile-information-form') --}}
+                    @include('profile.partials.update-profile-information-form')
                     <form action="{{route('profile.create')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <label for="bio">Bio:</label><br/>
@@ -21,8 +21,20 @@
                         <button type="submit">Submit</button>
                     </form>
                 </div>
-            </div>
+            </div> --}}
 
+
+            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                <div class="max-w-xl">
+                    @include('profile.partials.create-profile')
+                </div>
+            </div>
+{{--
+            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                <div class="max-w-xl">
+                    @include('profile.partials.update-profile-post')
+                </div>
+            </div> --}}
 
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                 <div class="max-w-xl">

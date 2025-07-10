@@ -15,6 +15,10 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{{asset('css/styles.css')}}" rel="stylesheet" />
+
+        @yield('css')
+        {{-- recaptcha js link --}}
+         {{-- <script src="https://www.google.com/recaptcha/api.js"></script> --}}
     </head>
     <body>
         <!-- Navigation-->

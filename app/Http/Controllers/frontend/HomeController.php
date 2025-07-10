@@ -10,8 +10,8 @@ use Illuminate\Support\Carbon;
 class HomeController extends Controller
 {
     public function index(){
-        $posts = Post::with(['user','categories'])->orderBy('created_at','desc')->paginate(3);
-        // dd($posts);
+        $posts = Post::with(['user','categories'])->orderBy('created_at','desc')->paginate(4);
+        // dd($posts); debug bar
 
         // $dateString = $posts['created_at'];
         // dd($dateString);

@@ -2,7 +2,14 @@
 
   @section('title', 'Contact')
 
+  @section('css')
+  {{-- recaptcha link --}}
+      <script src="https://www.google.com/recaptcha/api.js"></script>
+  @endsection
+
   @section('content')
+
+
       <!-- Page Header-->
       <header class="masthead" style="background-image: url('{{ asset('uploads/contact-bg.jpg') }}')">
           <div class="container position-relative px-4 px-lg-5">
@@ -31,15 +38,16 @@
                           <!-- To make this form functional, sign up at-->
                           <!-- https://startbootstrap.com/solution/contact-forms-->
                           <!-- to get an API token!-->
-                          <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                          <form action="{{route('contact.form')}}" method="POST" id="demo-form" data-sb-form-api-token="API_TOKEN">
+                            @csrf
                               <div class="form-floating">
-                                  <input class="form-control" id="name" type="text" placeholder="Enter your name..."
+                                  <input class="form-control" name="name" id="name" type="text" placeholder="Enter your name..."
                                       data-sb-validations="required" />
                                   <label for="name">Name</label>
                                   <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
                               </div>
                               <div class="form-floating">
-                                  <input class="form-control" id="email" type="email"
+                                  <input class="form-control" name="email" id="email" type="email"
                                       placeholder="Enter your email..." data-sb-validations="required,email" />
                                   <label for="email">Email address</label>
                                   <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.
@@ -47,14 +55,14 @@
                                   <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
                               </div>
                               <div class="form-floating">
-                                  <input class="form-control" id="phone" type="tel"
+                                  <input class="form-control" name="contact" id="phone" type="tel"
                                       placeholder="Enter your phone number..." data-sb-validations="required" />
                                   <label for="phone">Phone Number</label>
                                   <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is
                                       required.</div>
                               </div>
                               <div class="form-floating">
-                                  <textarea class="form-control" id="message" placeholder="Enter your message here..." style="height: 12rem"
+                                  <textarea class="form-control" name="message" id="message" placeholder="Enter your message here..." style="height: 12rem"
                                       data-sb-validations="required"></textarea>
                                   <label for="message">Message</label>
                                   <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.
@@ -70,10 +78,11 @@
                                       <div class="fw-bolder">Form submission successful!</div>
                                       To activate this form, sign up at
                                       <br />
-                                      <a
-                                          href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                                      {{-- <a
+                                          href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a> --}}
                                   </div>
                               </div>
+                              <input type="hidden" name="g-recaptcha-response" value="{{ env('GOOGLE_RECAPTCHA_KEY')}}"/>
                               <!-- Submit error message-->
                               <!---->
                               <!-- This is what your users will see when there is-->
@@ -81,14 +90,26 @@
                               <div class="d-none" id="submitErrorMessage">
                                   <div class="text-center text-danger mb-3">Error sending message!</div>
                               </div>
+
+                              @if ($errors->has('g-recaptcha-response'))
+                              <span class="text-danger"> {{$errors->first('g-recaptcha-response')}}</span>
+                              @endif
                               <!-- Submit Button-->
-                              <button class="btn btn-primary text-uppercase disabled" id="submitButton"
-                                  type="submit">Send</button>
+                              <button class="btn btn-primary text-uppercase g-recaptcha "
+                                  data-sitekey="{{ env('GOOGLE_RECAPTCHA_KEY')}}" data-callback='onSubmit' data-action='submit'
+                                  id="submitButton" type="submit">Send</button>
                           </form>
                       </div>
                   </div>
               </div>
           </div>
       </main>
+
+
+      <script>
+          function onSubmit(token) {
+              document.getElementById("demo-form").submit();
+          }
+      </script>
 
   @endsection

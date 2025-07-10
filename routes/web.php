@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -22,11 +23,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/profile/show',[ProfileController::class, 'show'])->name('profile.show');
     Route::post('/profile/delete',[ProfileController::class, 'delete'])->name('profile.delete');
+    Route::get('/edit/profile',[ProfileController::class, 'editProfile'])->name('prfile1.edit');
+    Route::put('/edit/profile',[ProfileController::class, 'updateProfile'])->name('profile1.update');
 
     //post route starts here
     Route::get('/post', [PostController::class,'index'])->name('post.write');
     Route::post('/post',[PostController::class,'create'])->name('post.create');
     Route::get('/post/list', [PostController::class,'list'])->name('post.list');
+    Route::get('edit/post',[PostController::class,'edit'])->name('post.edit');
 
 
     //category route
@@ -44,5 +48,8 @@ Route::middleware('auth')->group(function () {
 
     //post route
     Route::get('/post/{slug}',[PostController::class, 'show'])->name('post.show');
+
+    //contact route
+    Route::post('/contact',[ContactController::class, 'form'])->name('contact.form');
 
 require __DIR__.'/auth.php';

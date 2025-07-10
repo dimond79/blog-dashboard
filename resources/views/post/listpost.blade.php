@@ -18,7 +18,12 @@
                 <div class="my-4 p-6 text-red-900  bg-blue-100" >
                     <a href="{{ route('post.show', $post->slug) }}">
                         <h2>{{ $post->title }}</h2>
-                    </a><br />
+                    </a>
+                    {{-- <a href=''><button  class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 w-full">
+                Add Category
+            </button></a> --}}
+            <a href=''><i class="fas fa-edit"></i></a>
+                    <br />
                 </div>
                 @endforeach
 

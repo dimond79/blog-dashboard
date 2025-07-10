@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -16,6 +17,42 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
+    public function editProfile(){
+        $user = Auth::user();
+        $profile = $user->profile;
+        // dd($user);
+        return view('profile.partials.update-profile-post',compact('user','profile'));
+    }
+
+    public function updateProfile(Request $request){
+        $data = $request->validate([
+            'bio' => 'required|string',
+            'link' => 'required|in:male,female,other',
+            'avatar' => 'nullable|image|max:2048'
+        ]);
+
+        $profile = Auth::user()->profile;
+        // dd($profile);
+
+
+
+
+        if($request->hasFile('avatar')){
+            if($profile->avatar){
+                Storage::disk('public')->delete($profile->avatar);
+
+            }
+
+            $path = $request->file('avatar')->store('avatars','public');
+            $data['avatar'] = $path;
+        }
+
+        $profile->update($data);
+
+        return redirect()->route('profile.show')->with('success','Update success');
+
+    }
+
     public function edit(Request $request): View
     {
         return view('profile.edit', [
@@ -26,19 +63,21 @@ class ProfileController extends Controller
     public function create(Request $request){
         // dd($request->toArray());
         try{
+            $data = $request->validate([
+                'bio'=>'required|string',
+                'link'=>'required|in:male,female,other',
+                'avatar'=>'nullable|image|max:2048',
+            ]);
+
             $user = Auth::user();
 
             if ($user->profile) {
                 return response()->json(['error' => 'Profile already exist'], 409);
             }
 
-            $data = $request->validate([
-                'bio'=>'required|string',
-                'link'=>'nullable|string',
-                'avatar'=>'nullable|image|max:2048',
-            ]);
 
             $data['user_id'] = $request->user()->id;
+
             if($request->hasFile('avatar')){
                 $file = $request->file('avatar');
                 //optional, renaming the file for unique

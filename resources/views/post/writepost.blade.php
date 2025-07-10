@@ -46,6 +46,7 @@
                 Add Category
             </button>
         </form>
+
     </div>
 </div>
 

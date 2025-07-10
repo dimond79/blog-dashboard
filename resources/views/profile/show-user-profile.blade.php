@@ -25,8 +25,7 @@
 
 
                             <p><strong>Bio:</strong> {{ $profile->bio }}</p>
-                            <p><strong>Link:</strong> <a href="{{ $profile->link }}"
-                                    class="text-blue-600 underline">{{ $profile->link }}</a></p>
+                            <p><strong>Gender:</strong> {{ $profile->link }}</p>
 
                             <p><strong>Email:</strong>{{ $user->email }} </p>
 
@@ -34,6 +33,7 @@
 
 
                         </div>
+                        <a href="{{route('profile1.update')}}"><button class="btn btn-primary">Edit Profile</button></a>
                         <form action="{{ route('profile.delete') }} " method="POST">
                             @csrf
                             {{-- @method('Delete') --}}
